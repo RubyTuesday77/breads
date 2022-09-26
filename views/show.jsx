@@ -8,7 +8,7 @@ function Show({bread}) {
         <Default>
             <h3>{bread.name}</h3>
             <p>
-                and it
+                This bread
                 {
                     bread.hasGluten
                     ? <span> does </span>
