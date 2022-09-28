@@ -1,7 +1,6 @@
 const React = require('react')
 const Def = require('./layouts/default')
 
-
 function error() {
     return (
         <Def>
