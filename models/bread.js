@@ -1,3 +1,24 @@
+// Require Mongoose:
+const mongoose = require('mongoose')
+
+// Create shorthand for the Schema constructor:
+const { Schema } = mongoose
+
+// Define schema using the Schema constructor, saved as variable breadSchema:
+const breadSchema = new Schema({
+  name: { type: String, required: true },
+  hasGluten: Boolean,
+  image: { type: String, default: 'https://images.unsplash.com/photo-1517686469429-8bdb88b9f907?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80' }
+})
+
+// Create Bread model under the schema:
+const Bread = mongoose.model('Bread', breadSchema)
+
+// Export model (not schema) to use in breads controller (to replace hard-coded data):
+module.exports = Bread
+
+
+/* Comment out hard-coded data
 module.exports = [
     {
       name: 'Rye',
@@ -20,3 +41,4 @@ module.exports = [
       image: 'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80',
     }
 ]
+*/

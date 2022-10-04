@@ -16,7 +16,7 @@ function Default(html) {
                         <h1><a href="/breads">BreadCRUD</a></h1>
                     </header>
                     <div className="container">
-                        {html.children}
+                        { html.children }
                     </div>
                 </div>
             </body>
