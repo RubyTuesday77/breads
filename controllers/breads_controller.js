@@ -25,12 +25,10 @@ breads.get('/', (req, res) => {
 */
 
 
-
 // NEW
 breads.get('/new', (req, res) => {
   res.render('new')
 })
-
 
 
 // EDIT
@@ -51,7 +49,6 @@ breads.get('/:id/edit', (req, res) => {
   })
 })
 */
-
 
 
 // SHOW:
@@ -79,7 +76,6 @@ breads.get('/:arrayIndex', (req, res) => {
   }
 })
 */
-
 
 
 // CREATE:
@@ -112,7 +108,6 @@ breads.post('/', (req, res) => {
 */
 
 
-
 // UPDATE:
 breads.put('/:id', (req, res) => {
   if(req.body.hasGluten === 'on') {
@@ -140,7 +135,6 @@ breads.put('/:id', (req, res) => {
 */
 
 
-
 // DELETE:
 breads.delete('/:id', (req, res) => {
   Bread.findByIdAndDelete(req.params.id)
@@ -156,5 +150,39 @@ breads.delete('/:id', (req, res) => {
   res.status(303).redirect('/breads')
 })
 */
+
+
+// CREATE MULTIPLE BREADS:
+// 1. breadObjects variable is the array of bread objects to be added
+// 2. Go to http://localhost:[PORT]/breads/data/seed to add to the index 
+breads.get('/data/seed', (req, res) => {
+  let breadObjects = [
+    {
+      name: 'Rye',
+      hasGluten: true,
+      image: 'https://images.unsplash.com/photo-1595535873420-a599195b3f4a?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1050&q=80',
+    },
+    {
+      name: 'French',
+      hasGluten: true,
+      image: 'https://images.unsplash.com/photo-1534620808146-d33bb39128b2?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80',
+    },
+    {
+      name: 'Gluten Free',
+      hasGluten: false,
+      image: 'https://images.unsplash.com/photo-1546538490-0fe0a8eba4e6?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80',
+    },
+    {
+      name: 'Pumpernickel',
+      hasGluten: true,
+      image: 'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=1050&q=80',
+    }
+  ]
+  Bread.insertMany(breadObjects)
+    .then(createdBreads => {
+      res.redirect('/breads')
+    })
+})
+
 
 module.exports = breads
