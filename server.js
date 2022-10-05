@@ -8,8 +8,18 @@ const mongoose = require('mongoose')
 require('dotenv').config()
 const PORT = process.env.PORT
 const app = express()
-mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true, useUnifiedTopology: true },
-  () => { console.log('connected to mongo: ', process.env.MONGO_URI) }
+
+// Mongoose:
+const MONGO_URI = process.env.MONGO_URI
+mongoose.connect(
+  MONGO_URI,
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  },
+  () => {
+    console.log(`connected to mongo: ${MONGO_URI}`)
+  }
 )
 
 // MIDDLEWARE:
@@ -23,7 +33,7 @@ app.use(methodOverride('_method'))  // Accompanies methodOverride in DEPENDENCIE
 
 // ROUTES:
 app.get('/', (req, res) => {
-    res.send('Welcome to an Awesome App about Breads')
+    res.send('<h1>BreadCrud</h1>')
 })
 
 // Breads:
@@ -33,7 +43,7 @@ app.use('/breads', breadsController)
 
 // 404 Page:
 app.get('*', (req, res) => {
-  res.send('404')
+  res.render('error')
 })
 
 
