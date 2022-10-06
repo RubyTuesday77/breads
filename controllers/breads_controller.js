@@ -6,6 +6,7 @@ const Bread = require('../models/bread.js')
 breads.get('/', (req, res) => {
   Bread.find()
     .then(foundBreads => {
+      console.Console.log(foundBreads)
       res.render('index', {
         breads: foundBreads,
         title: 'Index Page'
