@@ -15,12 +15,17 @@ const breadSchema = new Schema({
   }
 })
 
+// Helper methods (instance method)
+breadSchema.methods.getBakedBy = function() {
+  return `${this.name} was baked with love by ${this.baker}`
+}
+
 // Create Bread model under the schema:
 const Bread = mongoose.model('Bread', breadSchema)
 
+
 // Export model (not schema) to use in breads controller (to replace hard-coded data):
 module.exports = Bread
-
 
 /* Comment out hard-coded data
 module.exports = [
