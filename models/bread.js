@@ -21,9 +21,9 @@ const breadSchema = new Schema({
   }
 })
 
-// Helper methods (instance method)
+// Helper methods (instance method):
 breadSchema.methods.getBakedBy = function() {
-  return `${this.name} was baked with love by ${this.baker}`
+  return `${this.name} was baked with love by ${this.baker.name}, who has been with us since ${this.baker.startDate.getFullYear()}.`
 }
 
 // Create Bread model under the schema:

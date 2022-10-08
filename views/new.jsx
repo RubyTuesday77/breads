@@ -32,7 +32,7 @@ function New({ bakers }) {
                         return (
                             <option value={ baker.id } key={ baker.id }>{ baker.name }</option>
                         )
-                    })}
+                    }) }
                 </select>
                 <br />
                 <input type="submit" />

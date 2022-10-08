@@ -40,11 +40,15 @@ breads.get('/new', (req, res) => {
 
 // EDIT
 breads.get('/:id/edit', (req, res) => {
-  Bread.findById(req.params.id)
-    .then(foundBread => {
-      res.render('edit', {
-        bread: foundBread
-      })
+  Baker.find()
+    .then(foundBakers => {
+      Bread.findById(req.params.id)
+        .then(foundBread => {
+          res.render('edit', {
+            bread: foundBread,
+            bakers: foundBakers
+          })
+        })
     })
 })
 
@@ -61,9 +65,9 @@ breads.get('/:id/edit', (req, res) => {
 // SHOW:
 breads.get('/:id', (req, res) => {
   Bread.findById(req.params.id)
+    .populate('baker')
     .then(foundBread => {
       const bakedBy = foundBread.getBakedBy()
-      console.log(bakedBy)
       res.render('show', {
         bread: foundBread
       })
@@ -162,8 +166,8 @@ breads.delete('/:id', (req, res) => {
 
 
 // CREATE MULTIPLE BREADS:
-// 1. breadObjects variable is the array of bread objects to be added
-// 2. Go to http://localhost:[PORT]/breads/data/seed to add to the index 
+// 1. breadObjects variable is the array of bread objects to be added.
+// 2. Go to http://localhost:[PORT]/breads/data/seed to add to the index.
 breads.get('/data/seed', (req, res) => {
   let breadObjects = [
     {
