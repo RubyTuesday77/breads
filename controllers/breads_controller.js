@@ -1,17 +1,22 @@
+// DEPENDENCIES:
 const express = require('express')
 const breads = express.Router()
-const Bread = require('../models/bread.js')
-const Baker = require('../models/baker.js')
+const Bread = require('../models/bread')
+const Baker = require('../models/baker')
+
 
 // INDEX:
 breads.get('/', (req, res) => {
-  Bread.find()
-    .then(foundBreads => {
-      console.log(foundBreads)
-      res.render('index', {
-        breads: foundBreads,
-        title: 'Index Page'
-      })
+  Baker.find()
+    .then(foundBakers => {
+      Bread.find()
+        .then(foundBreads => {
+          res.render('index', {
+            breads: foundBreads,
+            bakers: foundBakers,
+            title: 'Index Page'
+          })
+        })
     })
 })
 
@@ -27,7 +32,7 @@ breads.get('/', (req, res) => {
 */
 
 
-// NEW
+// NEW:
 breads.get('/new', (req, res) => {
   Baker.find()
     .then(foundBakers => {
@@ -38,7 +43,7 @@ breads.get('/new', (req, res) => {
 })
 
 
-// EDIT
+// EDIT:
 breads.get('/:id/edit', (req, res) => {
   Baker.find()
     .then(foundBakers => {
@@ -50,6 +55,10 @@ breads.get('/:id/edit', (req, res) => {
           })
         })
     })
+    .catch(err => {
+      console.log(err);
+      res.redirect('error');
+    });
 })
 
 /* Before Mongoose:
@@ -73,6 +82,7 @@ breads.get('/:id', (req, res) => {
       })
     })
     .catch(err => {
+      console.log(err)
       res.render('error')
     })
 })
@@ -133,6 +143,10 @@ breads.put('/:id', (req, res) => {
       console.log(updatedBread)
       res.redirect(`/breads/${req.params.id}`)
     })
+    .catch(err => {
+      console.log(err)
+      res.render('error')
+    })
 })
 
 /* Before Mongoose:
@@ -155,6 +169,10 @@ breads.delete('/:id', (req, res) => {
       console.log(deletedBread)
       res.status(303).redirect('/breads')
     })
+    .catch(err => {
+      console.log(err)
+      res.render('error')
+    })
 })
 
 /* Before Mongoose:
@@ -165,7 +183,7 @@ breads.delete('/:id', (req, res) => {
 */
 
 
-// CREATE MULTIPLE BREADS:
+// CREATE SEED ROUTE:
 // 1. breadObjects variable is the array of bread objects to be added.
 // 2. Go to http://localhost:[PORT]/breads/data/seed to add to the index.
 breads.get('/data/seed', (req, res) => {
@@ -195,7 +213,10 @@ breads.get('/data/seed', (req, res) => {
     .then(createdBreads => {
       res.redirect('/breads')
     })
+    .catch(err => {
+      console.log(err)
+      res.render('error')
+    })
 })
-
 
 module.exports = breads

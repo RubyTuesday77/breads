@@ -1,8 +1,10 @@
-// Require Mongoose:
+// DEPENDENCIES:
 const mongoose = require('mongoose')
+const Baker = require('./baker')
 
 // Create shorthand for the Schema constructor:
 const { Schema } = mongoose
+
 
 // Define schema using the Schema constructor, saved as variable breadSchema:
 const breadSchema = new Schema({
@@ -21,10 +23,12 @@ const breadSchema = new Schema({
   }
 })
 
+
 // Helper methods (instance method):
 breadSchema.methods.getBakedBy = function() {
-  return `${this.name} was baked with love by ${this.baker.name}, who has been with us since ${this.baker.startDate.getFullYear()}.`
+  return `${this.name} was baked with hate by ${this.baker.name}, who has been with us since ${this.baker.startDate.getFullYear()}.`
 }
+
 
 // Create Bread model under the schema:
 const Bread = mongoose.model('Bread', breadSchema)
@@ -32,6 +36,7 @@ const Bread = mongoose.model('Bread', breadSchema)
 
 // Export model (not schema) to use in breads controller (to replace hard-coded data):
 module.exports = Bread
+
 
 /* Comment out hard-coded data
 module.exports = [

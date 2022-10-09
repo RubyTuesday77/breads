@@ -1,8 +1,31 @@
-// Dependencies:
+// DEPENDENCIES:
 const express = require('express')
 const baker = express.Router()
-const Baker = require('../models/baker.js')
-const bakerSeedData = require('../models/baker_seed.js')
+const Baker = require('../models/baker')
+const bakerSeedData = require('../models/baker_seed')
+
+
+// GET index:
+baker.get('/', (req, res) => {
+    Baker.find()
+        .populate('breads')
+        .then(foundBakers => {
+            res.send(foundBakers)
+        })
+})
+
+
+// SHOW: 
+baker.get('/:id', (req, res) => {
+    Baker.findById(req.params.id)
+        .populate('breads')
+        .then(foundBaker => {
+            res.render('bakerShow', {
+                baker: foundBaker
+            })
+        })
+})
+
 
 
 // Create seed route (http://localhost:3004/bakers/data/seed) to seed database with our baker seed data:
