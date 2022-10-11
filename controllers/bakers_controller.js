@@ -5,6 +5,7 @@ const Baker = require('../models/baker')
 const bakerSeedData = require('../models/baker_seed')
 
 
+
 // GET index:
 baker.get('/', (req, res) => {
     Baker.find()
@@ -15,6 +16,7 @@ baker.get('/', (req, res) => {
 })
 
 
+
 // SHOW: 
 baker.get('/:id', (req, res) => {
     Baker.findById(req.params.id)
@@ -23,6 +25,16 @@ baker.get('/:id', (req, res) => {
             res.render('bakerShow', {
                 baker: foundBaker
             })
+        })
+})
+
+
+
+// DELETE:
+baker.delete('/:id', (req, res) => {
+    Baker.findByIdAndDelete(req.params.id)
+        .then(deletedBaker => {
+            res.status(303).redirect('/breads')
         })
 })
 

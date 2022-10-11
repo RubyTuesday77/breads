@@ -1,6 +1,5 @@
 // DEPENDENCIES:
 const mongoose = require('mongoose')
-const Baker = require('./baker')
 
 // Create shorthand for the Schema constructor:
 const { Schema } = mongoose

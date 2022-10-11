@@ -34,6 +34,15 @@ bakerSchema.virtual('breads', {
 })
 
 
+// Hooks:
+bakerSchema.post('findOneAndDelete', function() {
+    Bread.deleteMany({ baker: this._conditions._id })
+        .then(deleteStatus => {
+            console.log(deleteStatus)
+        })
+})            
+
+
 // Create Baker model under the schema:
 const Baker = mongoose.model('Baker', bakerSchema)
 

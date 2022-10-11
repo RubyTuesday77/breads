@@ -11,7 +11,7 @@ function Show({ baker }) {
             <h3>Breads { baker.name } has baked:</h3>
             <ul>
                 {
-                    baker.breads.map((bread) => {
+                    baker.breads.map(bread => {
                         return (
                             <li key={ bread.id }>
                                 { bread.name }
@@ -20,6 +20,9 @@ function Show({ baker }) {
                     })
                 }
             </ul>
+            <form action={ `/bakers/${baker.id}?_method=DELETE` } method="POST">
+                <input type="submit" value="DELETE"/>
+            </form>
         </Default>
     )
 }
