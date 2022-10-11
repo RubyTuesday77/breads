@@ -6,6 +6,28 @@ const Baker = require('../models/baker')
 
 
 // INDEX:
+breads.get('/', async (req, res) => {
+  const foundBakers = await Baker.find().lean()
+  const foundBreads = await Bread.find().limit(10).lean()
+  res.render('index', {
+    breads: foundBreads,
+    bakers: foundBakers,
+    title: 'Index Page'
+  })
+})
+
+/* Before Mongoose:
+breads.get('/', (req, res) => {
+  res.render('Index',
+    {
+      breads: Bread
+    }
+  )
+  // res.send(Bread)
+})
+*/
+
+/* Before async:
 breads.get('/', (req, res) => {
   Baker.find()
     .then(foundBakers => {
@@ -18,16 +40,6 @@ breads.get('/', (req, res) => {
           })
         })
     })
-})
-
-/* Before Mongoose:
-breads.get('/', (req, res) => {
-  res.render('Index',
-    {
-      breads: Bread
-    }
-  )
-  // res.send(Bread)
 })
 */
 

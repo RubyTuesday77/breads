@@ -5,7 +5,6 @@ const Baker = require('../models/baker')
 const bakerSeedData = require('../models/baker_seed')
 
 
-
 // GET index:
 baker.get('/', (req, res) => {
     Baker.find()
@@ -20,7 +19,10 @@ baker.get('/', (req, res) => {
 // SHOW: 
 baker.get('/:id', (req, res) => {
     Baker.findById(req.params.id)
-        .populate('breads')
+        .populate({
+            path: 'breads',
+            options: { limit: 5 }
+        })
         .then(foundBaker => {
             res.render('bakerShow', {
                 baker: foundBaker

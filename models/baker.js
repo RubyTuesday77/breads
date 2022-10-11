@@ -40,7 +40,7 @@ bakerSchema.post('findOneAndDelete', function() {
         .then(deleteStatus => {
             console.log(deleteStatus)
         })
-})            
+})
 
 
 // Create Baker model under the schema:
