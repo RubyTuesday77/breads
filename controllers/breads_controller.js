@@ -69,7 +69,6 @@ breads.get('/:id/edit', (req, res) => {
     })
     .catch(err => {
       console.log(err);
-      res.redirect('error');
     });
 })
 
@@ -95,7 +94,6 @@ breads.get('/:id', (req, res) => {
     })
     .catch(err => {
       console.log(err)
-      res.render('error')
     })
 })
 
