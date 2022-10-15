@@ -29,4 +29,3 @@ function Show({ baker }) {
 
 
 module.exports = Show
-
