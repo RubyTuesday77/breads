@@ -11,13 +11,13 @@ function Show({ bread }) {
                 This bread
                 {
                     bread.hasGluten
-                    ? <span> does </span>
-                    : <span> does NOT </span>
+                    ? <span> has </span>
+                    : <span> does NOT have </span>
                 }
-                have gluten.
+                gluten.
             </p>
             <img src={ bread.image } alt={ bread.name } />
-            <p>Baked by { bread.getBakedBy() }</p>
+            <p>{ bread.getBakedBy() }</p>
             <a href={ `/breads/${bread.id}/edit` }>
                 <button>Edit</button>
             </a>
